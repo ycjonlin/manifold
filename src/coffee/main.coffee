@@ -364,7 +364,7 @@ class Fractal2D extends Layer
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6, 1<<8, expr, valid, scheme
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6, 1<<10, expr, valid, scheme
 
       @context.restore()
 
