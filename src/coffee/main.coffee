@@ -290,7 +290,7 @@ class Fractal2D extends Layer
   constructor: (transforms, @expression)->
     super transforms, false
 
-  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
+  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid, color)->
 
     count = 0
     i0 = 0
@@ -300,12 +300,34 @@ class Fractal2D extends Layer
 
     dx = x1.vsub(x0).sdiv(babySteps)
     dy = y1.vsub(y0).sdiv(babySteps)
-    ds = sqrt((dx*dx+dy)*2)*jump
+    ds = sqrt(dx*dx+dy)*jump*sqrt(2)
 
     z0 = expr(x0, y0)
+    b0 = valid(z0)
 
     while i0 < babySteps or j0 < babySteps
       x1 = x0+dx*step
+      y1 = y0+dy*step
+      # expression
+      z01 = expr(x0, y1)
+      z10 = expr(x1, y0)
+      z11 = expr(x1, y1)
+      # valid
+      b01 = valid(z01)
+      b10 = valid(z10)
+      b11 = valid(z11)
+      # subdivision
+      if step > 1
+        Dx = x1-x0
+        Dy = y1-y0
+        Dz11 = z11-z0
+        if b0 != b1 or b1 and (Dx*Dx+Dy*Dy+Dz*Dz > ds*ds)
+          step >>= 1
+          continue
+      # render
+      c = color((z00+z01+z10+z11)/4)
+      @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
+      @context.fillRect x0, y0, x1, y1
 
     # stop
 
