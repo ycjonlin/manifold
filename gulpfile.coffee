@@ -28,7 +28,7 @@ config =
 
   scripts:
     source: './src/coffee/main.coffee'
-    destination: './public/coffee/'
+    destination: './public/js/'
     transform: ['coffeeify']
     extensions: ['.coffee']
     filename: 'bundle.js'
