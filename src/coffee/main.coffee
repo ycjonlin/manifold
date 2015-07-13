@@ -362,7 +362,7 @@ class Stack extends Element
     sign = (s)-> if s then 1 else -1
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
-    fractal = (x, y)-> -cos(x*x+y*y)
+    fractal = (x, y)-> (x*x+y*y)
     metric = (z, w)-> abs(z-w)>0.125
     color = (z)-> [128,(z*128+128)|0,255]
 
