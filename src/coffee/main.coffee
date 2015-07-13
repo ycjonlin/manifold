@@ -313,7 +313,7 @@ class Fractal2D extends Layer
       x1 = x0+dx*step
       # expression
       z1 = expr(x1, y0)
-      z3 = expr(x0, y1)
+      z3 = expr(x1, y1)
       # valid
       b1 = valid(z1)
       b3 = valid(z3)
@@ -322,9 +322,9 @@ class Fractal2D extends Layer
         Dx = x1-x0
         Dy = y1-y0
         Dz0 = z1-z0
-        Dz1 = z2-z1
-        Dz2 = z3-z2
-        Dz3 = z0-z3
+        Dz1 = z3-z1
+        Dz2 = z2-z3
+        Dz3 = z0-z2
         if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
           Dx*Dx+Dz0*Dz0 > ds*ds or Dy*Dy+Dz1*Dz1 > ds*ds or Dx*Dx+Dz2*Dz2 > ds*ds or Dy*Dy+Dz3*Dz3 > ds*ds)
           step >>= 1
