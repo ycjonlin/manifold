@@ -326,7 +326,7 @@ class Fractal2D extends Layer
         if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
           Dz0 > ds or Dz1 > ds*ds or Dz2 > ds*ds or Dz3 > ds*ds)
           step >>= 1
-          y1 = y1+dy*step
+          y1 = y0+dy*step
           z2 = expr(x0, y1)
           continue
       # render
