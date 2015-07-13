@@ -329,7 +329,7 @@ class Fractal2D extends Layer
           step >>= 1
           continue
       # render
-      console.log valid
+      console.log color
       c = color(z0)
       @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
