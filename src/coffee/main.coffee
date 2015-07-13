@@ -227,13 +227,13 @@ class Fractal1D extends Layer
   constructor: (transforms, @expression)->
     super transforms, true
 
-  _loop: (x0, x1, giantSteps, babySteps, expr, valid)->
+  _loop: (endpoint1, endpoint0, giantSteps, babySteps, expr, valid)->
 
-    du = (x1-x0)/babySteps
-    ds = (x1-x0)/giantSteps*sqrt(2)
+    du = (endpoint1-endpoint0)/babySteps
+    ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
     dt = tau/64
 
-    u0 = x0
+    u0 = endpoint0
     v0 = expr(u0)
     b0 = false
     t0 = atan2(v0-expr(u0-du), du)
@@ -292,13 +292,27 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
 
-    du = (x1-x0)/babySteps
-    dv = (y1-y0)/babySteps
-    ds = (x1-x0)/giantSteps*sqrt(2)
-    dt = (y1-y0)/giantSteps*sqrt(2)
+    dx = x1.vsub(x0).sdiv(babySteps)
+    dy = y1.vsub(y0).sdiv(babySteps)
+    ds = sqrt(dx*dx+dy)
 
-    u0 = x0
-    v0 = y0
+    x0 = x0
+    y0 = expr(x0)
+
+    count = 0
+    i0 = 0
+    j0 = 0
+
+    while i0 < babySteps or j0 < babySteps
+      x1 = x0+dx*step
+
+    # stop
+
+    du = endpoint1.vsub(endpoint0).sdiv(babySteps)
+    ds = endpoint1.vsub(endpoint0).sdiv(giantSteps/sqrt(2))
+    dt = tau/64
+
+    u0 = endpoint0
     v0 = expr(u0)
     b0 = false
     t0 = atan2(v0-expr(u0-du), du)
@@ -316,9 +330,9 @@ class Fractal2D extends Layer
       b1 = valid(v1)
       t1 = atan2(v1-v0, u1-u0)
       if step > 1
-        Du = u1-u0
-        Dv = v1-v0
-        if b0 != b1 or b1 and (Du*Du+Dv*Dv > ds*ds or abs(t1-t0) > dt)
+        Du = u1.vsub(u0)
+        Dv = v1.vsub(v0)
+        if b0 != b1 or b1 and (Du.norm()+Dv.norm() > ds.norm() or abs(t1-t0) > dt)
           step >>= 1
           continue
       if b0 != b1 or b1
