@@ -310,6 +310,7 @@ class Fractal2D extends Layer
     b0 = valid(z0)
 
     while true
+      count += 1
       x1 = x0+dx*step
       # expression
       z1 = expr(x1, y0)
@@ -352,7 +353,7 @@ class Fractal2D extends Layer
         j0 += step
         if j0 == babySteps
           break
-
+    console.log count
 
   _render: (domain)->
     
