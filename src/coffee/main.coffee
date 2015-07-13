@@ -304,19 +304,18 @@ class Fractal2D extends Layer
 
     x0 = X0
     y0 = Y0
+    y1 = y0+dy*step
     z0 = expr(x0, y0)
+    z2 = expr(x0, y1)
     b0 = valid(z0)
 
     while true
       x1 = x0+dx*step
-      y1 = y0+dy*step
       # expression
       z1 = expr(x1, y0)
-      z2 = expr(x1, y1)
       z3 = expr(x0, y1)
       # valid
       b1 = valid(z1)
-      b2 = valid(z2)
       b3 = valid(z3)
       # subdivision
       if step > 1
@@ -337,7 +336,9 @@ class Fractal2D extends Layer
       # proceed
       x0 = x1
       z0 = z1
+      z2 = z3
       b0 = b1
+      b2 = b3
       i0 += step
       while false#(i0&step) == 0 and step < jump
         step <<= 1
