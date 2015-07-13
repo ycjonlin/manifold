@@ -309,23 +309,23 @@ class Fractal2D extends Layer
       x1 = x0+dx*step
       y1 = y0+dy*step
       # expression
-      z1 = expr(x0, y1)
-      z2 = expr(x1, y0)
-      z3 = expr(x1, y1)
+      z1 = expr(x1, y0)
+      z2 = expr(x1, y1)
+      z3 = expr(x0, y1)
       # valid
-      b1 = valid(z01)
-      b2 = valid(z10)
-      b3 = valid(z11)
+      b1 = valid(z1)
+      b2 = valid(z2)
+      b3 = valid(z3)
       # subdivision
       if step > 1
         Dx = x1-x0
         Dy = y1-y0
-        Dz0 = z01-z00
-        Dz1 = z10-z00
-        Dz2 = z11-z01
-        Dz3 = z11-z10
-        if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or 
-          b0 and (Dx*Dx+Dy*Dy+Dz*Dz > ds*ds)
+        Dz0 = z1-z0
+        Dz1 = z2-z1
+        Dz2 = z3-z2
+        Dz3 = z0-z3
+        if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
+          Dx*Dx+Dz0*Dz0 > ds*ds or Dy*Dy+Dz1*Dz1 > ds*ds or Dx*Dx+Dz2*Dz2 > ds*ds or Dy*Dy+Dz3*Dz3 > ds*ds)
           step >>= 1
           continue
       # render
