@@ -301,7 +301,7 @@ class Fractal2D extends Layer
     ox = x0
     oy = y0
     dx = (x1-x0)/babySteps
-    dx = (y1-y0)/babySteps
+    dy = (y1-y0)/babySteps
 
     while true
       count += 1
@@ -318,34 +318,21 @@ class Fractal2D extends Layer
       if step > 1
         if dist(w0, w1) or dist(w0, w2) or dist(w1, w3) or dist(w2, w3)
           step >>= 1
-          y1 = y0+dy*step
-          z2 = expr(x0, y1)
           continue
       # render
-      color = scheme((z0+z1+z2+z3)/4)
+      color = scheme((w0+w1+w2+w3)/4)
       @context.fillStyle = "rgba(#{color[0]},#{color[1]},#{color[2]},0.75)"
-      @context.fillRect x0, y0, x1-x0, y1-y0
+      @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
-      x0 = x1
-      z0 = z1
-      z2 = z3
       i0 += step
       while (i0&step) == 0 and step < jump
         if (j0&step) == 0
           i0 -= step<<1
           j0 += step
-          y0 = y0+dy*step
           break
         step <<= 1
-        y1 = y0+dy*step
-        z2 = expr(x0, y1)
       if i0 == babySteps
         i0 = 0
-        x0 = X0
-        y0 = y0+dy*step
-        y1 = y0+dy*step
-        z0 = expr(x0, y0)
-        z2 = expr(x0, y1)
         j0 += step
         if j0 == babySteps
           break
