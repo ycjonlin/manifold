@@ -341,12 +341,13 @@ class Fractal2D extends Layer
     
     expr = @expression
     valid = (v)-> isFinite(v)
+    color = @color
 
     for s in [0..(1<<2)-1]
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<8, 1<<12, expr.bind(null, s), valid
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<8, 1<<12, expr.bind(null, s), valid, color
 
       @context.restore()
 
