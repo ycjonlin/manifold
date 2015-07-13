@@ -292,9 +292,10 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
 
-    du = (endpoint1-x0)/babySteps
-    ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
-    dt = tau/64
+    du = (x1-x0)/babySteps
+    dv = (y1-y0)/babySteps
+    ds = (x1-x0)/giantSteps*sqrt(2)
+    dt = (y1-y0)/giantSteps*sqrt(2)
 
     u0 = x0
     v0 = expr(u0)
