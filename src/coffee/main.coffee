@@ -347,6 +347,8 @@ class Fractal2D extends Layer
         y0 = y0+dy*jump
         z0 = expr(x0, y0)
         j0 += jump
+        if j0 == babySteps
+          break
 
 
   _render: (domain)->
