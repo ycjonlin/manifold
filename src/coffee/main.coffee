@@ -312,6 +312,7 @@ class Fractal2D extends Layer
     while true
       count += 1
       x1 = x0+dx*step
+      y1 = y0+dy*step
       # expression
       z1 = expr(x1, y0)
       z3 = expr(x1, y1)
