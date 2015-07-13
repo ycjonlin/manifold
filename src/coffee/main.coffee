@@ -41,7 +41,7 @@ class Layer extends Element
 
   render: ->
     transform = @transforms[@transforms.length-1]
-    codomain = math.matrix[
+    codomain = math.matrix([
       [0, @canvas.width], 
       [0, @canvas.height],
       [1, 1]
