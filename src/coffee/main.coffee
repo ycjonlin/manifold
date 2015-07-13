@@ -4,70 +4,6 @@ Manuscript = require './manuscript'
 Color = require './color'
 Math = require 'mathjs'
 
-class Point
-  constructor: (@x, @y)->
-
-class Rectangle
-  constructor: (@x0, @y0, @x1, @y1)->
-
-  diagnal: ->
-    norm(@x1-@x0, @y1-@y0)
-
-class Transform
-  constructor: (@xx, @yx, @xy, @yy, @x, @y)->
-
-  translate: (x, y)->
-    new Transform(@xx, @yx, @xy, @yy, @x+x, @y+y)
-
-  scale: (sx, sy, tx, ty)->
-    new Transform(
-      @xx*sx, @yx*sx, @xy*sy, @yy*sy, 
-      (@x-tx)*sx+tx, (@y-ty)*sy+ty)
-
-  map: (point)->
-    new Point(
-      +@xx*point.x+@xy*point.y+@x, 
-      +@yx*point.x+@yy*point.y+@y)
-
-  unmap: (point)->
-    det = @xx*@yy-@xy*@yx
-    x = point.x-@x
-    y = point.y-@y
-    new Point(
-      (+@yy*x-@xy*y)/det, 
-      (-@yx*x+@xx*y)/det)
-
-  box: (rectangle)->
-    p00 = @map new Point(rectangle.x0, rectangle.y0)
-    p10 = @map new Point(rectangle.x1, rectangle.y0)
-    p01 = @map new Point(rectangle.x0, rectangle.y1)
-    p11 = @map new Point(rectangle.x1, rectangle.y1)
-
-    x0 = min p00.x, p10.x, p01.x, p11.x
-    x1 = max p00.x, p10.x, p01.x, p11.x
-
-    y0 = min p00.y, p10.y, p01.y, p11.y
-    y1 = max p00.y, p10.y, p01.y, p11.y
-
-    new Rectangle(x0, y0, x1, y1)
-
-  unbox: (rectangle)->
-    p00 = @unmap new Point(rectangle.x0, rectangle.y0)
-    p10 = @unmap new Point(rectangle.x1, rectangle.y0)
-    p01 = @unmap new Point(rectangle.x0, rectangle.y1)
-    p11 = @unmap new Point(rectangle.x1, rectangle.y1)
-
-    x0 = min p00.x, p10.x, p01.x, p11.x
-    x1 = max p00.x, p10.x, p01.x, p11.x
-
-    y0 = min p00.y, p10.y, p01.y, p11.y
-    y1 = max p00.y, p10.y, p01.y, p11.y
-
-    new Rectangle(x0, y0, x1, y1)
-
-  apply: (context)->
-    context.transform @xx, @yx, @xy, @yy, @x, @y
-
 createElement = (tag, classList, children)->
   element = document.createElement tag
   if classList
@@ -248,9 +184,13 @@ class Stack extends Element
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
     @anchor = null
-    @transforms = [new Transform(
-      scale, 0, 0, -scale, 
-      width/2, height/2)]
+    @transforms = [
+      math.matrix([
+        [scale, 0, width/2],
+        [0,-scale, height/2],
+        [0, 0, 1]
+      ])
+    ]
     @layers = [
       new Grid(@transforms),
       new Axis(@transforms),
@@ -302,7 +242,7 @@ class Stack extends Element
       layer.render()
 
   $mouseDown: (event)->
-    @anchor = new Point(event.clientX, event.clientY)
+    @anchor = math.matrix([event.clientX, event.clientY, 1])
     @transforms.push @transforms[-1..][0]
   $mouseUp: (event)->
     @anchor = null
@@ -313,8 +253,8 @@ class Stack extends Element
       return
     array = @transforms
     array[array.length-1] = array[array.length-2].translate(
-      event.clientX-@anchor.x, 
-      event.clientY-@anchor.y)
+      event.clientX-@anchor.re, 
+      event.clientY-@anchor.im)
     @render()
 
   $mouseWheel: (event)->
