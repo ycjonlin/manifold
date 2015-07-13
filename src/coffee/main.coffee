@@ -363,7 +363,7 @@ class Stack extends Element
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
     fractal = (x, y)-> min(1, x*x+y*y)
-    metric = (z, w)-> abs(z-w)>0.1
+    metric = (z, w)-> abs(z-w)>0.05
     color = (z)-> [128, sqrt(z)*255|0,255]
 
     @anchor = null
