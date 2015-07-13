@@ -41,8 +41,12 @@ class Layer extends Element
 
   render: ->
     transform = @transforms[@transforms.length-1]
-    codomain = new Rectangle(0, 0, @canvas.width, @canvas.height)
-    domain = transform.unbox codomain
+    codomain = math.matrix[
+      [0, @canvas.width], 
+      [0, @canvas.height],
+      [1, 1]
+    ])
+    domain = math.multiply math.inv(transform), codomain
 
     @context.clearRect 0, 0, @canvas.width, @canvas.height
 
