@@ -320,7 +320,7 @@ class Fractal2D extends Layer
       if step > 1
         Dx = x1-x0
         Dy = y1-y0
-        Dz11 = z11-z0
+        Dz11 = z11-z00
         if b0 != b1 or b1 and (Dx*Dx+Dy*Dy+Dz*Dz > ds*ds)
           step >>= 1
           continue
@@ -328,45 +328,6 @@ class Fractal2D extends Layer
       c = color((z00+z01+z10+z11)/4)
       @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
-
-    # stop
-
-    du = endpoint1.vsub(endpoint0).sdiv(babySteps)
-    ds = endpoint1.vsub(endpoint0).sdiv(giantSteps/sqrt(2))
-    dt = tau/64
-
-    u0 = endpoint0
-    v0 = expr(u0)
-    b0 = false
-    t0 = atan2(v0-expr(u0-du), du)
-
-    count = 0
-    lower = 0
-    upper = babySteps
-    jump = ceil(babySteps/giantSteps)|0
-    step = jump
-
-    while lower < upper
-      count += 1
-      u1 = u0+du*step
-      v1 = expr(u1)
-      b1 = valid(v1)
-      t1 = atan2(v1-v0, u1-u0)
-      if step > 1
-        Du = u1.vsub(u0)
-        Dv = v1.vsub(v0)
-        if b0 != b1 or b1 and (Du.norm()+Dv.norm() > ds.norm() or abs(t1-t0) > dt)
-          step >>= 1
-          continue
-      if b0 != b1 or b1
-        if not b0
-          @context.moveTo u0, v0
-        @context.lineTo u1, v1
-      u0 = u1
-      v0 = v1
-      b0 = b1
-      t0 = t1
-      lower += step
       while (lower&step) == 0 and step < jump
         step <<= 1
 
