@@ -27,8 +27,8 @@ config =
     destination: './bower_components'
 
   scripts:
-    source: './src/js/main.coffee'
-    destination: './public/js/'
+    source: './src/coffee/main.coffee'
+    destination: './public/coffee/'
     transform: ['coffeeify']
     extensions: ['.coffee']
     filename: 'bundle.js'
