@@ -359,6 +359,9 @@ class Stack extends Element
     sign = (s)-> if s then 1 else -1
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
+    fractal = (x, y)-> x*x+y*y
+    color = (z)-> [z,z,z]
+
     @anchor = null
     @transforms = [new Transform(
       scale, 0, 0, -scale, 
@@ -366,9 +369,7 @@ class Stack extends Element
     @layers = [
       new Grid(@transforms),
       new Axis(@transforms),
-      new Fractal2D(@transforms, (x, y)-> 
-        x*x+y*y, 
-        (z)-> [z,z,z])
+      new Fractal2D(@transforms, fractal, color)
     ]
 
   render: ->
