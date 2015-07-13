@@ -343,6 +343,7 @@ class Fractal2D extends Layer
       while false#(i0&step) == 0 and step < jump
         step <<= 1
       if i0 == babySteps
+        break
         i0 = 0
         x0 = X0
         y0 = y0+dy*jump
