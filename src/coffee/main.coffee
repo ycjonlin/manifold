@@ -319,7 +319,7 @@ class Fractal2D extends Layer
       b2 = valid(z2)
       b3 = valid(z3)
       # subdivision
-      if false #step > 1
+      if step > 1
         Dx = x1-x0
         Dy = y1-y0
         Dz0 = z1-z0
