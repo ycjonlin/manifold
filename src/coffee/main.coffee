@@ -2,7 +2,7 @@
 
 Manuscript = require './manuscript'
 Color = require './color'
-Math = require 'mathjs'
+math = require 'mathjs'
 
 createElement = (tag, classList, children)->
   element = document.createElement tag
@@ -178,7 +178,7 @@ class Stack extends Element
   constructor: ->
     width = window.innerWidth
     height = window.innerHeight
-    scale = norm(width, height)/8
+    scale = math.norm([width, height])/8
 
     sign = (s)-> if s then 1 else -1
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
