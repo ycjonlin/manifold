@@ -2,6 +2,7 @@
 
 Manuscript = require './manuscript'
 Color = require './color'
+Math = require 'math'
 
 abs = Math.abs
 sign = Math.sign
