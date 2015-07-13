@@ -366,7 +366,7 @@ class Stack extends Element
     @layers = [
       new Grid(@transforms),
       new Axis(@transforms),
-      new Fractal2D(@transforms, (x, y)-> x*x+y*y, (z)-> (z,z,z)
+      new Fractal2D(@transforms, (x, y)-> x*x+y*y, (z)-> (z,z,z))
     ]
 
   render: ->
