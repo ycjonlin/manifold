@@ -292,16 +292,17 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
 
-    dx = x1.vsub(x0).sdiv(babySteps)
-    dy = y1.vsub(y0).sdiv(babySteps)
-    ds = sqrt(dx*dx+dy)
-
-    x0 = x0
-    y0 = expr(x0)
-
     count = 0
     i0 = 0
     j0 = 0
+    jump = ceil(babySteps/giantSteps)|0
+    step = jump
+
+    dx = x1.vsub(x0).sdiv(babySteps)
+    dy = y1.vsub(y0).sdiv(babySteps)
+    ds = sqrt((dx*dx+dy)*2)*jump
+
+    z0 = expr(x0, y0)
 
     while i0 < babySteps or j0 < babySteps
       x1 = x0+dx*step
