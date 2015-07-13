@@ -319,14 +319,12 @@ class Fractal2D extends Layer
       b3 = valid(z3)
       # subdivision
       if step > 1
-        Dx = x1-x0
-        Dy = y1-y0
-        Dz0 = z1-z0
-        Dz1 = z3-z1
-        Dz2 = z2-z3
-        Dz3 = z0-z2
+        Dz0 = abs(z1-z0)
+        Dz1 = abs(z3-z1)
+        Dz2 = abs(z2-z3)
+        Dz3 = abs(z0-z2)
         if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
-          Dx*Dx+Dz0*Dz0 > ds*ds or Dy*Dy+Dz1*Dz1 > ds*ds or Dx*Dx+Dz2*Dz2 > ds*ds or Dy*Dy+Dz3*Dz3 > ds*ds)
+          Dz0 > ds or Dz1 > ds*ds or Dz2 > ds*ds or Dz3 > ds*ds)
           step >>= 1
           continue
       # render
