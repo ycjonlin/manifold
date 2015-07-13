@@ -376,7 +376,7 @@ class Stack extends Element
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
     fractal = (x, y)-> x*x+y*y
-    color = (z)-> [128,z,255]
+    color = (z)-> [128,128,255]
 
     @anchor = null
     @transforms = [new Transform(
