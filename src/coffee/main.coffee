@@ -305,7 +305,7 @@ class Fractal2D extends Layer
     z0 = expr(x0, y0)
     b0 = valid(z0)
 
-    while i0 < babySteps or j0 < babySteps
+    while j0 < babySteps
       x1 = x0+dx*step
       y1 = y0+dy*step
       # expression
@@ -332,6 +332,8 @@ class Fractal2D extends Layer
       c = color(z0)
       @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
+
+      i0 += step
       while (lower&step) == 0 and step < jump
         step <<= 1
 
@@ -364,47 +366,7 @@ class Stack extends Element
     @layers = [
       new Grid(@transforms),
       new Axis(@transforms),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  1, 4, x) *
-        factor(s&1, 3, x) - 
-        factor(  1, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  0, 4, x) *
-        factor(s&1, 3, x) - 
-        factor(  1, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  1, 4, x) *
-        factor(s&1, 3, x) - 
-        factor(  0, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  0, 4, x) *
-        factor(s&1, 3, x) - 
-        factor(  0, 2,-x) * 
-        factor(s&2, 1,-x)),
-
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  1, 4, x) *
-        factor(s&1, 3, x) +
-        factor(  1, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  0, 4, x) *
-        factor(s&1, 3, x) + 
-        factor(  1, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  1, 4, x) *
-        factor(s&1, 3, x) + 
-        factor(  0, 2,-x) * 
-        factor(s&2, 1,-x)),
-      new Fractal1D(@transforms, (s, x)-> 
-        factor(  0, 4, x) *
-        factor(s&1, 3, x) + 
-        factor(  0, 2,-x) * 
-        factor(s&2, 1,-x)),
+      new Fractal2D(@transforms, (x, y)-> x*x+y*y, (z)-> (z,z,z)
     ]
 
   render: ->
