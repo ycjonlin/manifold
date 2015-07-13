@@ -287,10 +287,10 @@ class Fractal1D extends Layer
 
 class Fractal2D extends Layer
 
-  constructor: (transforms, @expression, @color)->
+  constructor: (transforms, @expression, @scheme)->
     super transforms, false
 
-  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid, color)->
+  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid, scheme)->
 
     count = 0
     i0 = 0
@@ -329,8 +329,8 @@ class Fractal2D extends Layer
           step >>= 1
           continue
       # render
-      c = color(z0)
-      @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
+      color = scheme(z0)
+      @context.fillStyle = "rgba(#{color[0]},#{color[1]},#{color[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
 
       i0 += step
@@ -341,13 +341,13 @@ class Fractal2D extends Layer
     
     expr = @expression
     valid = (v)-> isFinite(v)
-    color = @color
+    scheme = @scheme
 
     for s in [0..(1<<2)-1]
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<8, 1<<12, expr, valid, color
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<8, 1<<12, expr, valid, scheme
 
       @context.restore()
 
