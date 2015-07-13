@@ -298,6 +298,7 @@ class Fractal2D extends Layer
     dt = (y1-y0)/giantSteps*sqrt(2)
 
     u0 = x0
+    v0 = y0
     v0 = expr(u0)
     b0 = false
     t0 = atan2(v0-expr(u0-du), du)
