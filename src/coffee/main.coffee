@@ -329,7 +329,7 @@ class Fractal2D extends Layer
           step >>= 1
           continue
       # render
-      c = color((z0+z1+z2+z3)/4)
+      c = color(z0)
       @context.fillStyle = "rgba(#{c[0]},#{c[1]},#{c[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
       while (lower&step) == 0 and step < jump
