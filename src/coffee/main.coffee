@@ -11,6 +11,7 @@ class Rectangle
   constructor: (@x0, @y0, @x1, @y1)->
 
   diagnal: ->
+    console.log 'diagnal'
     norm(@x1-@x0, @y1-@y0)
 
 class Transform
