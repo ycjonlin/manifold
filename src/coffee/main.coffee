@@ -334,8 +334,11 @@ class Fractal2D extends Layer
       @context.fillRect x0, y0, x1, y1
 
       i0 += step
-      while (lower&step) == 0 and step < jump
+      while (i0&step) == 0 and step < jump
         step <<= 1
+      if i0 == babySteps
+        i0 = 0
+        j0 += jump
 
   _render: (domain)->
     
