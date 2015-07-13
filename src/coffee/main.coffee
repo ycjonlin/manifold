@@ -287,7 +287,7 @@ class Fractal1D extends Layer
 
 class Fractal2D extends Layer
 
-  constructor: (transforms, @expression)->
+  constructor: (transforms, @expression, @color)->
     super transforms, false
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid, color)->
