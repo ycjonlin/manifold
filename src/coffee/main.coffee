@@ -374,7 +374,7 @@ class Stack extends Element
     sign = (s)-> if s then 1 else -1
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
-    fractal = (x, y)-> sqrt(x*x+y*y)
+    fractal = (x, y)-> sin(x*x+y*y)
     color = (z)-> [128,z|0,255]
 
     @anchor = null
