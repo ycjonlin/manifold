@@ -360,43 +360,43 @@ class Stack extends Element
     @layers = [
       new Grid(@transforms),
       new Axis(@transforms),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  1, 4, x) *
         factor(s&1, 3, x) - 
         factor(  1, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  0, 4, x) *
         factor(s&1, 3, x) - 
         factor(  1, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  1, 4, x) *
         factor(s&1, 3, x) - 
         factor(  0, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  0, 4, x) *
         factor(s&1, 3, x) - 
         factor(  0, 2,-x) * 
         factor(s&2, 1,-x)),
 
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  1, 4, x) *
         factor(s&1, 3, x) +
         factor(  1, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  0, 4, x) *
         factor(s&1, 3, x) + 
         factor(  1, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  1, 4, x) *
         factor(s&1, 3, x) + 
         factor(  0, 2,-x) * 
         factor(s&2, 1,-x)),
-      new Fractal(@transforms, (s, x)-> 
+      new Fractal1D(@transforms, (s, x)-> 
         factor(  0, 4, x) *
         factor(s&1, 3, x) + 
         factor(  0, 2,-x) * 
