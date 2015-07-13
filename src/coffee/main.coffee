@@ -277,7 +277,7 @@ class Fractal extends Layer
     for s in [0..(1<<2)-1]
       @context.save()
       @context.beginPath()
-      self.transform().apply @context
+      @transform().apply @context
 
       @_loop domain.x0, domain.x1, 1<<8, 1<<12, expr.bind(null, s), valid
 
