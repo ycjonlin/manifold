@@ -186,9 +186,9 @@ class Stack extends Element
     @anchor = null
     @transforms = [
       math.matrix([
-        [scale, 0, width/2],
-        [0,-scale, height/2],
-        [0, 0, 1]
+        [ scale,     0,  width/2],
+        [     0,-scale, height/2],
+        [     0,     0,        1]
       ])
     ]
     @layers = [
