@@ -307,7 +307,7 @@ class Fractal2D extends Layer
     z0 = expr(x0, y0)
     b0 = valid(z0)
 
-    while j0 < babySteps
+    while true
       x1 = x0+dx*step
       y1 = y0+dy*step
       # expression
@@ -339,7 +339,7 @@ class Fractal2D extends Layer
       z0 = z1
       b0 = b1
       i0 += step
-      while (i0&step) == 0 and step < jump
+      while false#(i0&step) == 0 and step < jump
         step <<= 1
       if i0 == babySteps
         i0 = 0
@@ -347,6 +347,7 @@ class Fractal2D extends Layer
         y0 = y0+dy*jump
         z0 = expr(x0, y0)
         j0 += jump
+
 
   _render: (domain)->
     
