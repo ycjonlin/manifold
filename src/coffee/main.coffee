@@ -320,12 +320,8 @@ class Fractal2D extends Layer
       b3 = valid(z3)
       # subdivision
       if step > 1
-        Dz0 = abs(z1-z0)
-        Dz1 = abs(z3-z1)
-        Dz2 = abs(z2-z3)
-        Dz3 = abs(z0-z2)
         if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
-          Dz0 > ds or Dz1 > ds or Dz2 > ds or Dz3 > ds)
+          abs(z1-z0) > ds or abs(z3-z1) > ds or abs(z2-z3) > ds or abs(z0-z2) > ds)
           step >>= 1
           y1 = y0+dy*step
           z2 = expr(x0, y1)
