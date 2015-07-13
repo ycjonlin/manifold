@@ -308,8 +308,7 @@ class Fractal2D extends Layer
     b0 = valid(z0)
 
     while j0 < babySteps
-      x1 = X0+dx*step
-      y1 = Y0+dy*step
+      x1 = x0+dx*step
       # expression
       z1 = expr(x1, y0)
       z2 = expr(x1, y1)
@@ -335,7 +334,10 @@ class Fractal2D extends Layer
       color = scheme(z0)
       @context.fillStyle = "rgba(#{color[0]},#{color[1]},#{color[2]},0.75)"
       @context.fillRect x0, y0, x1, y1
-
+      # proceed
+      x0 = x1
+      z0 = z1
+      b0 = b1
       i0 += step
       while (i0&step) == 0 and step < jump
         step <<= 1
