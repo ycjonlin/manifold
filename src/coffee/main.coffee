@@ -290,7 +290,7 @@ class Fractal2D extends Layer
   constructor: (transforms, @expression, @distinguishable, @scheme)->
     super transforms, false
 
-  _loop: (X0, X1, Y0, Y1, giantSteps, babySteps, expr, dist, scheme)->
+  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, dist, scheme)->
 
     count = 0
     i0 = 0
@@ -298,18 +298,17 @@ class Fractal2D extends Layer
     jump = ceil(babySteps/giantSteps)|0
     step = jump
 
-    dx = (X1-X0)/babySteps
-    dy = (Y1-Y0)/babySteps
-
-    x0 = X0
-    y0 = Y0
-    y1 = y0+dy*step
-    z0 = expr(x0, y0)
-    z2 = expr(x0, y1)
+    ox = x0
+    oy = y0
+    dx = (x1-x0)/babySteps
+    dx = (y1-y0)/babySteps
 
     while true
       count += 1
-      x1 = x0+dx*step
+      u0 = ox+dx*(i0)
+      u1 = ox+dx*(i0+step)
+      v0 = oy+dy*(j0)
+      v1 = oy+dy*(j0+step)
       # expression
       z1 = expr(x1, y0)
       z3 = expr(x1, y1)
@@ -330,6 +329,11 @@ class Fractal2D extends Layer
       z2 = z3
       i0 += step
       while (i0&step) == 0 and step < jump
+        if (j0&step) == 0
+          i0 -= step<<1
+          j0 += step
+          y0 = y0+dy*step
+          break
         step <<= 1
         y1 = y0+dy*step
         z2 = expr(x0, y1)
