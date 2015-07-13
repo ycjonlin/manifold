@@ -179,9 +179,9 @@ class Axis extends Layer
   _render: (domain)->
     scale = exp(floor(log(16/domain.diagnal())/ln2)*ln2)
 
-    @save()
-    @beginPath()
-    self.transform().apply @context
+    @context.save()
+    @context.beginPath()
+    @transform().apply @context
 
     @context.moveTo 0, domain.y0
     @context.lineTo 0, domain.y1
@@ -189,10 +189,10 @@ class Axis extends Layer
     @context.moveTo domain.x0, 0
     @context.lineTo domain.x1, 0
 
-    @restore()
-    @lineWidth = 1
-    @strokeStyle = 'rgba(0,0,0,1)'
-    @stroke()
+    @context.restore()
+    @context.lineWidth = 1
+    @context.strokeStyle = 'rgba(0,0,0,1)'
+    @context.stroke()
 
 class Grid extends Layer
   constructor: (transforms)->
@@ -201,9 +201,9 @@ class Grid extends Layer
   _render: (domain)->
     scale = exp(floor(log(16/domain.diagnal())/ln2)*ln2)
 
-    @save()
-    @beginPath()
-    self.transform().apply @context
+    @context.save()
+    @context.beginPath()
+    @transform().apply @context
 
     for i in [floor(domain.x0*scale)..ceil(domain.x1*scale)]
       if i == 0
@@ -217,10 +217,10 @@ class Grid extends Layer
       @context.moveTo domain.x0, i/scale
       @context.lineTo domain.x1, i/scale
 
-    @restore()
-    @lineWidth = 1
-    @strokeStyle = 'rgba(0,0,0,0.125)'
-    @stroke()
+    @context.restore()
+    @context.lineWidth = 1
+    @context.strokeStyle = 'rgba(0,0,0,0.125)'
+    @context.stroke()
 
 class Fractal extends Layer
 
@@ -273,11 +273,17 @@ class Fractal extends Layer
     expr = @expression
     valid = (v)-> v >= domain.y0 and v <= domain.y1
 
-    @begin()
     for s in [0..(1<<2)-1]
+      @context.save()
+      @context.beginPath()
+      self.transform().apply @context
+
       @_loop domain.x0, domain.x1, 1<<8, 1<<12, expr.bind(null, s), valid
-      @stroke @color, 3
-    @end()
+
+      @context.restore()
+      @context.lineWidth = 3
+      @context.strokeStyle = @color
+      @context.stroke()
 
 class Stack extends Element
   constructor: ->
