@@ -304,7 +304,7 @@ class Fractal2D extends Layer
 
     x0 = X0
     y0 = Y0
-    y1 = y0+dy*step
+    y1 = y0+dy*jump
     z0 = expr(x0, y0)
     z2 = expr(x0, y1)
     b0 = valid(z0)
@@ -345,7 +345,8 @@ class Fractal2D extends Layer
       if i0 == babySteps
         i0 = 0
         x0 = X0
-        y0 = y0+dy*jump
+        y0 = y1
+        y1 = y1+dy*jump
         z0 = expr(x0, y0)
         j0 += jump
         if j0 == babySteps
