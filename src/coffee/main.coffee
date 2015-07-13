@@ -287,10 +287,10 @@ class Fractal1D extends Layer
 
 class Fractal2D extends Layer
 
-  constructor: (transforms, @expression, @scheme)->
+  constructor: (transforms, @expression, @distinguishable, @scheme)->
     super transforms, false
 
-  _loop: (X0, X1, Y0, Y1, giantSteps, babySteps, expr, valid, scheme)->
+  _loop: (X0, X1, Y0, Y1, giantSteps, babySteps, expr, dist, scheme)->
 
     count = 0
     i0 = 0
@@ -300,14 +300,12 @@ class Fractal2D extends Layer
 
     dx = (X1-X0)/babySteps
     dy = (Y1-Y0)/babySteps
-    ds = 0.05
 
     x0 = X0
     y0 = Y0
     y1 = y0+dy*step
     z0 = expr(x0, y0)
     z2 = expr(x0, y1)
-    b0 = valid(z0)
 
     while true
       count += 1
@@ -315,13 +313,9 @@ class Fractal2D extends Layer
       # expression
       z1 = expr(x1, y0)
       z3 = expr(x1, y1)
-      # valid
-      b1 = valid(z1)
-      b3 = valid(z3)
       # subdivision
       if step > 1
-        if (b0 and b1 and b2 and b3) != (b0 or b1 or b2 or b3) or b0 and (
-          abs(z1-z0) > ds or abs(z3-z1) > ds or abs(z2-z3) > ds or abs(z0-z2) > ds)
+        if dist(z1, z0) or dist(z3, z1) or dist(z2, z3) or dist(z0, z2)
           step >>= 1
           y1 = y0+dy*step
           z2 = expr(x0, y1)
@@ -356,14 +350,14 @@ class Fractal2D extends Layer
   _render: (domain)->
     
     expr = @expression
-    valid = (v)-> isFinite(v)
+    dist = @distinguishable
     scheme = @scheme
 
     for s in [0..(1<<2)-1]
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6, 1<<7, expr, valid, scheme
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6, 1<<7, expr, dist, scheme
 
       @context.restore()
 
@@ -377,6 +371,7 @@ class Stack extends Element
     factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
 
     fractal = (x, y)-> -cos(x*x+y*y)
+    metric = (z, w)-> (z-w)>0.1
     color = (z)-> [128,(z*128+128)|0,255]
 
     @anchor = null
@@ -384,7 +379,7 @@ class Stack extends Element
       scale, 0, 0, -scale, 
       width/2, height/2)]
     @layers = [
-      new Fractal2D(@transforms, fractal, color),
+      new Fractal2D(@transforms, fractal, metric, color),
       new Grid(@transforms),
       new Axis(@transforms)
     ]
