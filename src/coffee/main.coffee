@@ -222,56 +222,15 @@ class Grid extends Layer
     @context.strokeStyle = 'rgba(0,0,0,0.125)'
     @context.stroke()
 
-class Fractal extends Layer
+class Fractal1D extends Layer
 
   constructor: (transforms, @expression)->
     super transforms, true
 
-  _loop: (endpoint0, endpoint1, giantSteps, babySteps, expr, valid)->
+  _loop: (x0, x1, giantSteps, babySteps, expr, valid)->
 
-    du = (endpoint1-endpoint0)/babySteps
-    ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
-    dt = tau/64
-
-    u0 = endpoint0
-    v0 = expr(u0)
-    b0 = false
-    t0 = atan2(v0-expr(u0-du), du)
-
-    count = 0
-    lower = 0
-    upper = babySteps
-    jump = ceil(babySteps/giantSteps)|0
-    step = jump
-
-    while lower < upper
-      count += 1
-      u1 = u0+du*step
-      v1 = expr(u1)
-      b1 = valid(v1)
-      t1 = atan2(v1-v0, u1-u0)
-      if step > 1
-        Du = u1-u0
-        Dv = v1-v0
-        if b0 != b1 or b1 and (Du*Du+Dv*Dv > ds*ds or abs(t1-t0) > dt)
-          step >>= 1
-          continue
-      if b0 != b1 or b1
-        if not b0
-          @context.moveTo u0, v0
-        @context.lineTo u1, v1
-      u0 = u1
-      v0 = v1
-      b0 = b1
-      t0 = t1
-      lower += step
-      while (lower&step) == 0 and step < jump
-        step <<= 1
-
-  _loop: (endpoint0, endpoint1, giantSteps, babySteps, expr, valid)->
-
-    du = (endpoint1-endpoint0)/babySteps
-    ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
+    du = (x1-x0)/babySteps
+    ds = (x1-x0)/giantSteps*sqrt(2)
     dt = tau/64
 
     u0 = endpoint0
@@ -325,6 +284,65 @@ class Fractal extends Layer
       @context.lineWidth = 3
       @context.strokeStyle = @color
       @context.stroke()
+
+class Fractal2D extends Layer
+
+  constructor: (transforms, @expression)->
+    super transforms, false
+
+  _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
+
+    du = (endpoint1-endpoint0)/babySteps
+    ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
+    dt = tau/64
+
+    u0 = endpoint0
+    v0 = expr(u0)
+    b0 = false
+    t0 = atan2(v0-expr(u0-du), du)
+
+    count = 0
+    lower = 0
+    upper = babySteps
+    jump = ceil(babySteps/giantSteps)|0
+    step = jump
+
+    while lower < upper
+      count += 1
+      u1 = u0+du*step
+      v1 = expr(u1)
+      b1 = valid(v1)
+      t1 = atan2(v1-v0, u1-u0)
+      if step > 1
+        Du = u1-u0
+        Dv = v1-v0
+        if b0 != b1 or b1 and (Du*Du+Dv*Dv > ds*ds or abs(t1-t0) > dt)
+          step >>= 1
+          continue
+      if b0 != b1 or b1
+        if not b0
+          @context.moveTo u0, v0
+        @context.lineTo u1, v1
+      u0 = u1
+      v0 = v1
+      b0 = b1
+      t0 = t1
+      lower += step
+      while (lower&step) == 0 and step < jump
+        step <<= 1
+
+  _render: (domain)->
+    
+    expr = @expression
+    valid = (v)-> isFinite(v)
+
+    for s in [0..(1<<2)-1]
+      @context.save()
+      @transform().apply @context
+
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<8, 1<<12, expr.bind(null, s), valid
+
+      @context.restore()
 
 class Stack extends Element
   constructor: ->
