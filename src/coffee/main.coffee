@@ -159,37 +159,8 @@ class Layer extends Element
 
     @_render domain
 
-  begin: ()->
-    transform = @transforms[@transforms.length-1]
-
-    @context.save()
-    @context.beginPath()
-    transform.apply @context
-
-  end: ()->
-    @context.restore()
-  
-  stroke: (color, width=1, cap='butt', join='miter')->
-    transform = @transforms[@transforms.length-1]
-
-    @context.restore()
-    @context.lineWidth = width
-    @context.lineCap = cap
-    @context.lineJoin = join
-    @context.strokeStyle = color
-    @context.stroke()
-
-    @context.save()
-    @context.beginPath()
-    transform.apply @context
-    
-  fill: (color)->
-    @context.restore()
-    @context.fillStyle = color
-    @context.fill()
-
-    @context.save()
-    @context.beginPath()
+  transform: ()->
+    @transforms[@transforms.length-1]
 
   $$resize: (event)->
     @canvas.width = window.innerWidth
@@ -208,7 +179,9 @@ class Axis extends Layer
   _render: (domain)->
     scale = exp(floor(log(16/domain.diagnal())/ln2)*ln2)
 
-    @begin()
+    @save()
+    @beginPath()
+    self.transform().apply @context
 
     @context.moveTo 0, domain.y0
     @context.lineTo 0, domain.y1
@@ -216,9 +189,10 @@ class Axis extends Layer
     @context.moveTo domain.x0, 0
     @context.lineTo domain.x1, 0
 
-    @stroke 'rgba(0,0,0,1)'
-
-    @end()
+    @restore()
+    @lineWidth = 1
+    @strokeStyle = 'rgba(0,0,0,1)'
+    @stroke()
 
 class Grid extends Layer
   constructor: (transforms)->
@@ -227,7 +201,9 @@ class Grid extends Layer
   _render: (domain)->
     scale = exp(floor(log(16/domain.diagnal())/ln2)*ln2)
 
-    @begin()
+    @save()
+    @beginPath()
+    self.transform().apply @context
 
     for i in [floor(domain.x0*scale)..ceil(domain.x1*scale)]
       if i == 0
@@ -241,9 +217,10 @@ class Grid extends Layer
       @context.moveTo domain.x0, i/scale
       @context.lineTo domain.x1, i/scale
 
-    @stroke 'rgba(0,0,0,0.125)'
-
-    @end()
+    @restore()
+    @lineWidth = 1
+    @strokeStyle = 'rgba(0,0,0,0.125)'
+    @stroke()
 
 class Fractal extends Layer
 
