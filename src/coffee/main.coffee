@@ -298,8 +298,8 @@ class Fractal2D extends Layer
     jump = ceil(babySteps/giantSteps)|0
     step = jump
 
-    dx = x1.vsub(x0).sdiv(babySteps)
-    dy = y1.vsub(y0).sdiv(babySteps)
+    dx = (x1-x0)/babySteps
+    dy = (y1-y0)/babySteps
     ds = sqrt(dx*dx+dy)*jump*sqrt(2)
 
     z0 = expr(x0, y0)
