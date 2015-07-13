@@ -233,7 +233,7 @@ class Fractal1D extends Layer
     ds = (x1-x0)/giantSteps*sqrt(2)
     dt = tau/64
 
-    u0 = endpoint0
+    u0 = x0
     v0 = expr(u0)
     b0 = false
     t0 = atan2(v0-expr(u0-du), du)
@@ -292,11 +292,11 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, valid)->
 
-    du = (endpoint1-endpoint0)/babySteps
+    du = (endpoint1-x0)/babySteps
     ds = (endpoint1-endpoint0)/giantSteps*sqrt(2)
     dt = tau/64
 
-    u0 = endpoint0
+    u0 = x0
     v0 = expr(u0)
     b0 = false
     t0 = atan2(v0-expr(u0-du), du)
