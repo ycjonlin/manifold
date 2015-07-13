@@ -1,0 +1,36 @@
+doctype html
+html
+  include ./mixins.jade
+  head
+    title Manifold
+    // code mirror
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/addon/mode/overlay.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/addon/edit/continuelist.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/meta.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/xml/xml.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/mode/markdown/markdown.js')
+    link(rel='stylesheet', href='//cdnjs.cloudflare.com/ajax/libs/codemirror/5.4.0/codemirror.css')
+    // bootstrap
+    script(src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js')
+    script(src='//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/js/bootstrap.min.js')
+    link(rel='stylesheet', href='css/style.css')
+  body
+    main
+      section(id='content')
+      section(id='sidebar')
+        form(id='source')
+          input(type='range')
+          input(type='range')
+          input(type='range')
+          input(type='range')
+          textarea(id='manuscript')
+            = '$ (i, j)+exp(0, t) for t, i, j #1ABC9C\n'
+            = '$ exp(0, t) for t #1ABC9C\n'
+      +nav('Manifold', 'menu', 'default', 'fixed-top')
+        +nav_item('#') Edit
+        +nav_item('#') Fork
+        +nav_item('#') Share
+        +nav_item('#') Login
+    script(src='js/bundle.js')
+

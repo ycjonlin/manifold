@@ -1,0 +1,42 @@
+{
+  "name": "manifold",
+  "version": "0.0.1",
+  "description": "Project template for gulp.js",
+  "author": "Riku Rouvila <riku.rouvila@leonidasoy.fi>",
+  "license": "MIT",
+  "main": "gulpfile.js",
+  "scripts": {
+    "prepublish": "bower install",
+    "start": "gulp",
+    "build": "gulp build",
+    "test": "karma start test/karma.conf.js"
+  },
+  "keywords": [
+    "gulp",
+    "template"
+  ],
+  "dependencies": {
+    "browser-sync": "^2.7.13",
+    "browserify": "^10.2.4",
+    "coffee-script": "^1.9.3",
+    "coffeeify": "^1.1.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-bower": "0.0.10",
+    "gulp-coffee": "^2.3.1",
+    "gulp-duration": "0.0.0",
+    "gulp-jade": "^1.0.1",
+    "gulp-replace": "^0.5.3",
+    "gulp-rev": "^5.0.1",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-streamify": "0.0.5",
+    "gulp-uglify": "^1.2.0",
+    "gulp-util": "^3.0.6",
+    "node-notifier": "^4.2.3",
+    "rimraf": "^2.4.1",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.2.3"
+  },
+  "devDependencies": {}
+}

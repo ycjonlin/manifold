@@ -1,0 +1,65 @@
+doctype html
+html
+  include ./mixins.jade
+  head
+    title Asm
+    script.
+      function generate(t) {
+        return {x: t, y: Math.sin(t)};
+      }
+      t0 = generate(0);
+      t1 = generate(1);
+
+      function condition(t0, t1) {
+        return t1.x-t0.x < 1/4 && t1.y-t0.y < 1/8;
+      }
+      function mean(t0, t1) {
+        return generate((t0.x+t1.x)/2);
+      }
+
+      function recurrsive(t0, t1) {
+        var set = [];
+        function yield(t) {
+          set.push(t);
+        }
+        yield(t0);
+        function sub(t0, t1) {
+          if (condition(t0, t1)) {
+            yield(t1);
+            return;
+          }
+          var t2 = mean(t0, t1);
+          sub(t0, t2);
+          sub(t2, t1);
+        }
+        sub(t0, t1);
+        return set;
+      }
+
+      function forLoop(t0, t1) {
+        var set = [];
+        function yield(t) {
+          set.push(t);
+        }
+        yield(t0);
+        var stack = [];
+        while (true) {
+          if (condition(t0, t1)) {
+            yield(t1);
+            if (stack.length == 0) {
+              break;
+            }
+            t0 = t1;
+            t1 = stack.pop();
+          } else {
+            stack.push(t1);
+            t1 = mean(t0, t1);
+          }
+        }
+        return set;
+      }
+
+      console.log(recurrsive(t0, t1).map(function(t){return t.x;}));
+      console.log(forLoop(t0, t1).map(function(t){return t.x;}));
+  body
+

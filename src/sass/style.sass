@@ -1,0 +1,67 @@
+@import url(http://fonts.googleapis.com/css?family=Noto+Sans)
+@import url(http://fonts.googleapis.com/css?family=Noto+Serif:400,700,400italic,700italic&subset=latin,greek)
+
+$font-family-base: 'Noto Sans', sans-serif
+
+$panel-bg: rgba(255,255,255,0.75)
+$panel-color: #3498db
+$panel-shadow-blur: 6px
+$panel-shadow: 0 0 $panel-shadow-blur -1px rgba(0,0,0,0.5)
+$panel-border: solid 1px rgba(255,255,255,0.75)
+$panel-link-color: #337ab7
+
+$navbar-default-bg: $panel-bg
+$navbar-default-color: $panel-color
+$navbar-default-border: $panel-border
+$navbar-default-link-color: $panel-link-color
+@import "bootstrap"
+@import "font-awesome"
+
+@import "slider"
+@import "manuscript"
+
+html, body
+  width: 100%
+  height: 100%
+  font-size: 1em
+  overflow: hidden
+
+.navbar-default
+  box-shadow: $panel-shadow
+
+.stack
+  position: relative
+  width: 100%
+  height: 100%
+  .layer
+    position: fixed
+    left: 0
+    top: 0
+
+#sidebar
+  position: fixed
+  left: 0
+  top: 0
+  box-sizing: border-box
+  padding-top: $navbar-height
+
+  form
+    box-sizing: content-box
+    overflow: hidden
+    width: 100%
+    height: 100%
+    padding: 10px 20px
+
+  @media (orientation: portrait)
+    width: 100%
+    height: 50%
+    form
+      padding-bottom: $panel-shadow-blur
+      margin-bottom: -$panel-shadow-blur
+  @media (orientation: landscape)
+    width: 50%
+    height: 100%
+    max-width: 360px
+    form
+      padding-right: $panel-shadow-blur
+      margin-right: -$panel-shadow-blur
