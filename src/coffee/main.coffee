@@ -300,7 +300,7 @@ class Fractal2D extends Layer
 
     dx = (X1-X0)/babySteps
     dy = (Y1-Y0)/babySteps
-    ds = 0.5
+    ds = 0.05
 
     x0 = X0
     y0 = Y0
