@@ -4,54 +4,6 @@ Manuscript = require './manuscript'
 Color = require './color'
 Math = require 'mathjs'
 
-abs = Math.abs
-sign = Math.sign
-step = (x)-> if x > 0 then 1 else 0
-
-min = Math.min
-max = Math.max
-
-floor = Math.floor
-ceil = Math.ceil
-round = Math.round
-
-sqrt = Math.sqrt
-pow = Math.pow
-exp = Math.exp
-log = Math.log
-
-cos = Math.cos
-sin = Math.sin
-tan = Math.tan
-
-acos = Math.acos
-asin = Math.asin
-atan = Math.atan
-atan2 = Math.atan2
-
-cosh = (x)->
-  exp_x = exp(x)
-  (exp_x+1/exp_x)*0.5
-sinh = (x)->
-  exp_x = exp(x)
-  (exp_x-1/exp_x)*0.5
-tanh = (x)-> 
-  exp_x = exp(x)
-  (exp_x-1/exp_x)/(exp_x+1/exp_x)
-
-acosh = (x)->
-  log(x+sqrt(x*x-1))
-asinh = (x)->
-  log(x+sqrt(x*x+1))
-atanh = (x)->
-  log((1+x)/(1-x))*0.5
-
-pi = Math.PI
-tau = pi*2
-ln2 = log(2)
-
-norm = (x, y)-> sqrt(x*x+y*y)
-
 class Point
   constructor: (@x, @y)->
 
