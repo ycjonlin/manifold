@@ -76,7 +76,8 @@ class Axis extends Layer
 
     @context.save()
     @context.beginPath()
-    @transform().apply @context
+    transform = @transform()
+    @context.transform transform
 
     @context.moveTo 0, domain.y0
     @context.lineTo 0, domain.y1
