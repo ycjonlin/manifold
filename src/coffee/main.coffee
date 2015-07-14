@@ -372,7 +372,7 @@ class Stack extends Element
         if radius > bailout
           break
         [u, v] = [u*u-v*v+x, 2*u*v+y]
-      #n += 1+log(log(bailout)/log(radius))/log(2)
+      n += 1+log(log(bailout)/log(radius))/log(2)
       n/count
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
