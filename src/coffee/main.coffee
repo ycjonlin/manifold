@@ -291,7 +291,7 @@ class Fractal2D extends Layer
     super transforms, false
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, dist, scheme)->
-
+  
     p = 1/sqrt(2)
     q = (1-p)/2
 
@@ -325,7 +325,7 @@ class Fractal2D extends Layer
         continue
       # render
       color = scheme((w0+w1+w2+w3)/4)
-      @context.fillStyle = "rgba(#{color[0]},#{color[1]},#{color[2]},0.25)"
+      @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
       @context.fillRect u0+(u1-u0)*q, v0+(v1-v0)*q, (u1-u0)*p, (v1-v0)*p
       # proceed
       i0 += step
