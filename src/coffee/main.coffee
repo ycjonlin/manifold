@@ -326,18 +326,18 @@ class Fractal2D extends Layer
       # proceed
       w0 = w1
       w2 = w3
-      i0 = (i0+step)|0
-      if ((i0&step)|0) == (0|0)
-        while ((i0&step)|0) == (0|0) and (step|0) < (jump|0)
-          if ((j0&step)|0) == (0|0)
-            i0 = (i0-(step<<1))|0
-            j0 = (j0+step)|0
+      i0 += step
+      if (i0&step) == 0
+        while (i0&step) == 0 and step < jump
+          if (j0&step) == 0
+            i0 -= step<<1
+            j0 += step
             break
-          j0 = (j0-step)|0
-          step = (step<<1)|0
+          j0 -= step
+          step <<= 1
         if i0 == babySteps
           i0 = 0
-          j0 = (j0+step)|0
+          j0 += step
           if j0 == babySteps
             break
         u0 = ox+dx*(i0)
