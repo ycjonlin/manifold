@@ -367,7 +367,7 @@ class Stack extends Element
     scale = norm(width, height)/8
 
     fractal = (x,y)->
-      [u, v] = [-0.7, 0.25]
+      [u, v] = [-0.7, 0]
       for n in [0..128]
         if x*x+y*y > 128
           break
