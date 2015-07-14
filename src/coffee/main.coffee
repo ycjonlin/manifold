@@ -369,7 +369,7 @@ class Stack extends Element
     fractal = (x,y)->
       [u, v] = [-0.7, 0.25]
       for n in [0..128]
-        if x*x+y*y > 10
+        if x*x+y*y > 128
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
       max(0,min(1,n/128))
