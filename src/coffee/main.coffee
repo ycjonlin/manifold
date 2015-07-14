@@ -334,11 +334,11 @@ class Fractal2D extends Layer
             break
           j0 -= step
           step <<= 1
-        if i0 == babySteps and j0 == babySteps
-          break
         if i0 == babySteps
           i0 = 0
           j0 += step
+          if j0 == babySteps
+            break
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
     console.log count
