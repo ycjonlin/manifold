@@ -318,6 +318,7 @@ class Fractal2D extends Layer
       if step > 1
         if dist(w0, w1) or dist(w0, w2) or dist(w1, w3) or dist(w2, w3)
           step >>= 1
+          v1 = oy+dy*(j0+step)
           continue
       # render
       color = scheme((w0+w1+w2+w3)/4)
@@ -333,9 +334,9 @@ class Fractal2D extends Layer
           v1 = oy+dy*(j0+step)
           break
         j0 -= step
+        step <<= 1
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
-        step <<= 1
       if i0 == babySteps
         i0 = 0
         j0 += step
