@@ -366,11 +366,12 @@ class Stack extends Element
     fractal = (x,y)->
       bailout = 256
       count = 16
+      [u, v] = 0
       for n in [0..count]
-        radius = sqrt(x*x+y*y)
+        radius = sqrt(u*u+v*v)
         if radius > bailout
           break
-        [x, y] = [x*x-y*y+1, 2*x*y]
+        [u, v] = [u*u-v*v+x, 2*u*v+y]
       #n += 1+log(log(bailout)/log(radius))/log(2)
       n/count
     metric = (x,y,z,w)-> 
