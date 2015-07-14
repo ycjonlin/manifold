@@ -324,7 +324,7 @@ class Fractal2D extends Layer
       # render
       color = scheme((w0+w1+w2+w3)/4)
       @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
-      @context.fillRect u0, v0, u1-u0, v1-v0
+      @context.strokeRect u0, v0, u1-u0, v1-v0
       # proceed
       i0 += step
       u0 = ox+dx*(i0)
