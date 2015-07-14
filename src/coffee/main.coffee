@@ -374,7 +374,7 @@ class Stack extends Element
         if r > m
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      n = n+1+log(log(m)/log(r))/log(2)
+      n = n+1
       max(0,min(1,n/256))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
