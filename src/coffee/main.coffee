@@ -317,6 +317,7 @@ class Fractal2D extends Layer
         step >>= 1
         u1 = ox+dx*(i0+step)
         v1 = oy+dy*(j0+step)
+        w0 = expr(u0, v0)
         w2 = expr(u0, v1)
         continue
       # render
