@@ -305,14 +305,16 @@ class Fractal2D extends Layer
     
     v0 = oy+dy*(j0)
     v1 = oy+dy*(j0+step)
+    w0 = expr(u0, v0)
+    w2 = expr(u0, v1)
     for _ in [1..1<<16]
       count += 1
       u0 = ox+dx*(i0)
       u1 = ox+dx*(i0+step)
       # expression
       w0 = expr(u0, v0)
-      w1 = expr(u1, v0)
       w2 = expr(u0, v1)
+      w1 = expr(u1, v0)
       w3 = expr(u1, v1)
       # subdivision
       if step > 1
