@@ -375,6 +375,7 @@ class Stack extends Element
         if absq > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
+      console.log bailout, absq
       n += 1+log(log(bailout)/log(absq))/log(2)
       n/count
     metric = (x,y,z,w)-> 
