@@ -385,7 +385,7 @@ class Stack extends Element
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
-      not ((m2-m1*m1)<1e-3)
+      not ((m2-m1*m1)<1e-2)
     color = (z)-> [128, z*255|0,255]
 
     @anchor = null
