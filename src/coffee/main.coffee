@@ -308,9 +308,8 @@ class Fractal2D extends Layer
     w0 = expr(u0, v0)
     w2 = expr(u0, v1)
     for _ in [1..1<<16]
-      u0 = ox+dx*(i0)
-      u1 = ox+dx*(i0+step)
       count += 1
+      u1 = ox+dx*(i0+step)
       # expression
       w1 = expr(u1, v0)
       w3 = expr(u1, v1)
@@ -319,7 +318,6 @@ class Fractal2D extends Layer
         step >>= 1
         u1 = ox+dx*(i0+step)
         v1 = oy+dy*(j0+step)
-        w0 = expr(u0, v0)
         w2 = expr(u0, v1)
         continue
       # render
@@ -327,6 +325,7 @@ class Fractal2D extends Layer
       @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
       @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
+      u0 = u1
       w0 = w1
       w2 = w3
       i0 += step
