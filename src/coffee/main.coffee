@@ -368,6 +368,7 @@ class Stack extends Element
 
     fractal = (x,y)-> 
       n = 0
+      [x, y] = [x*x-y*y, 2*x*y]
       max(0,min(1,n/8))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
