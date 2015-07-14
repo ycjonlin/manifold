@@ -368,14 +368,15 @@ class Stack extends Element
 
     fractal = (x,y)->
       bailout = 256
+      count = 256
       [u, v] = [-0.7, 0]
-      for n in [0..256]
+      for n in [0..count]
         absq = x*x+y*y
         if absq > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
       n += 1+log(log(bailout)/log(absq))/log(2)
-      n/256
+      n/count
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
