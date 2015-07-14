@@ -340,9 +340,9 @@ class Fractal2D extends Layer
           j0 += step
           if j0 == babySteps
             break
-        u0 = ox+dx*(i0)
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
+        u0 = ox+dx*(i0)
         w0 = expr(u0, v0)
         w2 = expr(u0, v1)
     console.log count
