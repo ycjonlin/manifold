@@ -303,11 +303,11 @@ class Fractal2D extends Layer
     dx = (x1-x0)/babySteps
     dy = (y1-y0)/babySteps
 
-    u0 = ox+dx*(i0)
-    u1 = ox+dx*(i0+step)
     v0 = oy+dy*(j0)
     v1 = oy+dy*(j0+step)
     for _ in [1..1<<16]
+      u0 = ox+dx*(i0)
+      u1 = ox+dx*(i0+step)
       count += 1
       # expression
       w0 = expr(u0, v0)
@@ -324,31 +324,23 @@ class Fractal2D extends Layer
       # render
       color = scheme((w0+w1+w2+w3)/4)
       @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
-      @context.strokeRect u0, v0, u1-u0, v1-v0
+      @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
       i0 += step
-      u0 = ox+dx*(i0)
-      u1 = ox+dx*(i0+step)
       while (i0&step) == 0 and step < jump
         if (j0&step) == 0
           i0 -= step<<1
           j0 += step
-          u0 = ox+dx*(i0)
-          u1 = ox+dx*(i0+step)
           v0 = oy+dy*(j0)
           v1 = oy+dy*(j0+step)
           break
         j0 -= step
         step <<= 1
-        u0 = ox+dx*(i0)
-        u1 = ox+dx*(i0+step)
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
       if i0 == babySteps
         i0 = 0
         j0 += step
-        u0 = ox+dx*(i0)
-        u1 = ox+dx*(i0+step)
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
         if j0 == babySteps
