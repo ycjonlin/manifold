@@ -368,7 +368,7 @@ class Stack extends Element
 
     fractal = (x,y)->
       for n in [0..32]
-        if x*x+y*y < 1
+        if x*x+y*y > 1
           break
         [x, y] = [x*x-y*y-0.7, 2*x*y]
       max(0,min(1,n/32))
