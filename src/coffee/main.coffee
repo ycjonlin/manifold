@@ -366,7 +366,9 @@ class Stack extends Element
     height = window.innerHeight
     scale = norm(width, height)/8
 
-    fractal = (x,y)-> min(1, x*x+y*y)
+    fractal = (x,y)-> 
+      n = 0
+      max(0,min(1,n/8))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
