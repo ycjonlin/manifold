@@ -367,10 +367,11 @@ class Stack extends Element
     scale = norm(width, height)/8
 
     fractal = (x,y)->
+      [u, v] = [0.5, 0.25]
       for n in [0..128]
         if x*x+y*y > 1
           break
-        [x, y] = [x*x-y*y-0.1, 2*x*y]
+        [x, y] = [x*x-y*y+u, 2*x*y+v]
       max(0,min(1,n/128))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
