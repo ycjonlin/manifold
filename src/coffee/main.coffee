@@ -367,20 +367,19 @@ class Stack extends Element
     scale = norm(width, height)/8
 
     fractal = (x,y)->
-      m = 256
+      bailout = 256
       [u, v] = [-0.7, 0]
       for n in [0..256]
-        r = x*x+y*y
-        if r > m
+        absq = x*x+y*y
+        if absq > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      n = n+1+log(r)
-      max(0,min(1,n/m))
+      n+1+log(absq)
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
       (m2-m1*m1)>1e-4
-    color = (z)-> [128, sqrt(z)*255|0,255]
+    color = (z)-> [128, sqrt(z)*16|0,255]
 
     @anchor = null
     @transforms = [new Transform(
