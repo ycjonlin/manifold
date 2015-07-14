@@ -319,6 +319,8 @@ class Fractal2D extends Layer
         step >>= 1
         u1 = ox+dx*(i0+step)
         v1 = oy+dy*(j0+step)
+        w0 = expr(u0, v0)
+        w2 = expr(u0, v1)
         continue
       # render
       color = scheme((w0+w1+w2+w3)/4)
@@ -343,6 +345,8 @@ class Fractal2D extends Layer
             break
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
+        w0 = expr(u0, v0)
+        w2 = expr(u0, v1)
     console.log count
 
   _render: (domain)->
