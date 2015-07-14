@@ -311,8 +311,8 @@ class Fractal2D extends Layer
       count += 1
       # expression
       w0 = expr(u0, v0)
-      w2 = expr(u0, v1)
       w1 = expr(u1, v0)
+      w2 = expr(u0, v1)
       w3 = expr(u1, v1)
       # subdivision
       if step > 1 and dist(w0, w1, w2, w3)
@@ -322,7 +322,7 @@ class Fractal2D extends Layer
         continue
       # render
       color = scheme((w0+w1+w2+w3)/4)
-      @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
+      #@context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
       @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
       i0 += step
