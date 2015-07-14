@@ -330,7 +330,7 @@ class Fractal2D extends Layer
       if ((i0&step)|0) == 0
         while ((i0&step)|0) == 0 and step < jump
           if (j0&step) == 0
-            i0 -= step<<1
+            i0 = i0-step<<1
             j0 += step
             break
           j0 -= step
