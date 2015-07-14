@@ -364,12 +364,12 @@ class Stack extends Element
     scale = norm(width, height)/8
 
     fractal = (x,y)->
-      bailout = 2
+      bailout = 4
       count = 256
       u = 0
       v = 0
       for n in [0..count]
-        radius = sqrt(u*u+v*v)
+        radius = u*u+v*v
         if radius > bailout
           break
         w = u
