@@ -302,7 +302,9 @@ class Fractal2D extends Layer
     oy = y0
     dx = (x1-x0)/babySteps
     dy = (y1-y0)/babySteps
-
+    
+    v0 = oy+dy*(j0)
+    v1 = oy+dy*(j0+step)
     for _ in [1..1<<16]
       count += 1
       u0 = ox+dx*(i0)
