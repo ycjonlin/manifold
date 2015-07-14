@@ -310,8 +310,6 @@ class Fractal2D extends Layer
       u1 = ox+dx*(i0+step)
       count += 1
       # expression
-      w0 = expr(u0, v0)
-      w2 = expr(u0, v1)
       w1 = expr(u1, v0)
       w3 = expr(u1, v1)
       # subdivision
@@ -319,12 +317,16 @@ class Fractal2D extends Layer
         step >>= 1
         u1 = ox+dx*(i0+step)
         v1 = oy+dy*(j0+step)
+        w0 = expr(u0, v0)
+        w2 = expr(u0, v1)
         continue
       # render
       color = scheme((w0+w1+w2+w3)/4)
       @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
       @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
+      w0 = w1
+      w2 = w3
       i0 += step
       if (i0&step) == 0
         while (i0&step) == 0 and step < jump
@@ -341,6 +343,8 @@ class Fractal2D extends Layer
             break
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
+        w0 = expr(u0, v0)
+        w2 = expr(u0, v1)
     console.log count
 
   _render: (domain)->
