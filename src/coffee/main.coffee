@@ -368,11 +368,11 @@ class Stack extends Element
 
     fractal = (x,y)->
       [u, v] = [-0.7, 0]
-      for n in [0..128]
-        if x*x+y*y > 128
+      for n in [0..256]
+        if x*x+y*y > 256
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      max(0,min(1,n/128))
+      max(0,min(1,n/256))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
