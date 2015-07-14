@@ -307,8 +307,6 @@ class Fractal2D extends Layer
       count += 1
       u0 = ox+dx*(i0)
       u1 = ox+dx*(i0+step)
-      v0 = oy+dy*(j0)
-      v1 = oy+dy*(j0+step)
       # expression
       w0 = expr(u0, v0)
       w1 = expr(u1, v0)
@@ -329,12 +327,18 @@ class Fractal2D extends Layer
         if (j0&step) == 0
           i0 -= step<<1
           j0 += step
+          v0 = oy+dy*(j0)
+          v1 = oy+dy*(j0+step)
           break
         j0 -= step
+        v0 = oy+dy*(j0)
+        v1 = oy+dy*(j0+step)
         step <<= 1
       if i0 == babySteps
         i0 = 0
         j0 += step
+        v0 = oy+dy*(j0)
+        v1 = oy+dy*(j0+step)
         if j0 == babySteps
           break
     console.log count
