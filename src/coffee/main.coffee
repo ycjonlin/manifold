@@ -370,7 +370,7 @@ class Stack extends Element
       for n in [0..128]
         if x*x+y*y > 1
           break
-        [x, y] = [x*x-y*y+1, 2*x*y]
+        [x, y] = [x*x-y*y+0.5, 2*x*y]
       max(0,min(1,n/128))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
