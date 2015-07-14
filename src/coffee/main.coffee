@@ -291,7 +291,7 @@ class Fractal2D extends Layer
     super transforms, false
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, dist, scheme)->
-  
+
     p = 1/sqrt(2)
     q = (1-p)/2
 
@@ -318,7 +318,7 @@ class Fractal2D extends Layer
       w1 = expr(u1, v0)
       w3 = expr(u1, v1)
       # subdivision
-      if step > 1 and dist(w0, w1) or dist(w0, w2) or dist(w1, w3) or dist(w2, w3)
+      if step > 1 and dist(w0, w1, w2, w3)
         step >>= 1
         u1 = ox+dx*(i0+step)
         v1 = oy+dy*(j0+step)
@@ -366,11 +366,11 @@ class Stack extends Element
     height = window.innerHeight
     scale = norm(width, height)/8
 
-    sign = (s)-> if s then 1 else -1
-    factor = (s, c, x)-> sqrt(c)+sign(s)*sqrt(c-x)
-
-    fractal = (x, y)-> min(1, x*x+y*y)
-    metric = (z, w)-> abs(z-w)>0.05
+    fractal = (x,y)-> min(1, x*x+y*y)
+    metric = (x,y,z,w)-> 
+      m1 = (x+y+z+w)/4
+      m2 = (x*x+y*y+z*z+w*w)/4
+      (m2-m1*m1)>0.1
     color = (z)-> [128, sqrt(z)*255|0,255]
 
     @anchor = null
