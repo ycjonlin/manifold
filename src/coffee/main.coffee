@@ -374,12 +374,12 @@ class Stack extends Element
         if absq > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      n+1+log(absq)
+      (n+1+log(absq))/256
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
       (m2-m1*m1)>1e-4
-    color = (z)-> [128, sqrt(z)*16|0,255]
+    color = (z)-> [128, sqrt(z)*255|0,255]
 
     @anchor = null
     @transforms = [new Transform(
