@@ -375,7 +375,6 @@ class Stack extends Element
         if radius > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      console.log bailout, radius, n
       n += 1+log(log(bailout)/log(radius))/log(2)
       n/count
     metric = (x,y,z,w)-> 
