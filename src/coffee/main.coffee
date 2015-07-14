@@ -375,7 +375,7 @@ class Stack extends Element
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
       n = n+1
-      max(0,min(1,n/256))
+      max(0,min(1,n/m))
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
