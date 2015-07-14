@@ -327,24 +327,25 @@ class Fractal2D extends Layer
       @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
       i0 += step
-      while (i0&step) == 0 and step < jump
-        if (j0&step) == 0
-          i0 -= step<<1
+      if (i0&step) == 0 and step < jump or i0 == babySteps
+        while (i0&step) == 0 and step < jump
+          if (j0&step) == 0
+            i0 -= step<<1
+            j0 += step
+            v0 = oy+dy*(j0)
+            v1 = oy+dy*(j0+step)
+            break
+          j0 -= step
+          step <<= 1
+          v0 = oy+dy*(j0)
+          v1 = oy+dy*(j0+step)
+        if i0 == babySteps
+          i0 = 0
           j0 += step
           v0 = oy+dy*(j0)
           v1 = oy+dy*(j0+step)
-          break
-        j0 -= step
-        step <<= 1
-        v0 = oy+dy*(j0)
-        v1 = oy+dy*(j0+step)
-      if i0 == babySteps
-        i0 = 0
-        j0 += step
-        v0 = oy+dy*(j0)
-        v1 = oy+dy*(j0+step)
-        if j0 == babySteps
-          break
+          if j0 == babySteps
+            break
     console.log count
 
   _render: (domain)->
