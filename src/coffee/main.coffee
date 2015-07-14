@@ -292,9 +292,6 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, dist, scheme)->
 
-    p = 1/sqrt(2)
-    q = (1-p)/2
-
     count = 0
     i0 = 0
     j0 = 0
@@ -326,7 +323,7 @@ class Fractal2D extends Layer
       # render
       color = scheme((w0+w1+w2+w3)/4)
       @context.fillStyle = "rgb(#{color[0]},#{color[1]},#{color[2]})"
-      @context.fillRect u0+(u1-u0)*q, v0+(v1-v0)*q, (u1-u0)*p, (v1-v0)*p
+      @context.fillRect u0, v0, u1-u0, v1-v0
       # proceed
       i0 += step
       if (i0&step) == 0
