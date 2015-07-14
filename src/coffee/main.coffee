@@ -315,7 +315,7 @@ class Fractal2D extends Layer
       # subdivision
       if step > 1 and dist(w0, w1, w2, w3)
         step >>= 1
-        u1 = ox+dx*(i0+step)
+        u1 = +ox++dx*+((i0+step)|0)
         v1 = oy+dy*(j0+step)
         w2 = expr(u0, v1)
         continue
