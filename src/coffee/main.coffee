@@ -364,7 +364,7 @@ class Stack extends Element
     scale = norm(width, height)/8
 
     fractal = (x,y)->
-      bailout = 256
+      bailout = 2
       count = 16
       [u, v] = 0
       for n in [0..count]
