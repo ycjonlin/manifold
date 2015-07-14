@@ -368,7 +368,7 @@ class Stack extends Element
 
     fractal = (x,y)->
       bailout = 256
-      count = 32
+      count = 16
       [u, v] = [0.5, 0.25]
       for n in [0..count]
         radius = sqrt(x*x+y*y)
