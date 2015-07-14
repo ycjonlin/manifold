@@ -374,7 +374,7 @@ class Stack extends Element
         if absq > bailout
           break
         [x, y] = [x*x-y*y+u, 2*x*y+v]
-      (n+1+log(log(absq)/log(bailout))/log(2))/256
+      (n+1+log(log(bailout)/log(absq))/log(2))/256
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
