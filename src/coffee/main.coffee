@@ -341,7 +341,6 @@ class Fractal2D extends Layer
           if j0 == babySteps
             break
         u0 = ox+dx*(i0)
-        u1 = ox+dx*(i0+step)
         v0 = oy+dy*(j0)
         v1 = oy+dy*(j0+step)
         w0 = expr(u0, v0)
