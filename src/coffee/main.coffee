@@ -389,7 +389,7 @@ class Stack extends Element
       m2 = (x*x+y*y+z*z+w*w)/4
       #not ((m2-m1*m1)<1e10)
       false
-    color = (z)-> [128, z, 255]
+    color = (z)-> [128, 120, 255]
 
     @anchor = null
     @transforms = [new Transform(
