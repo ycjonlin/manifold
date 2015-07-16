@@ -292,6 +292,8 @@ class Fractal2D extends Layer
 
   _loop: (x0, x1, y0, y1, giantSteps, babySteps, expr, dist, scheme)->
 
+    p = 1/sqrt(2)
+
     count = 0
     i0 = 0
     j0 = 0
