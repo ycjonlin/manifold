@@ -345,7 +345,7 @@ class Fractal2D extends Layer
         v1 = oy+dy*(j0+step)
         w0 = expr(u0, v0)
         w2 = expr(u0, v1)
-    console.log count
+    console.log giantSteps, babySteps, count
 
   _render: (domain)->
     
