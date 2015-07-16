@@ -305,7 +305,7 @@ class Fractal2D extends Layer
 
     v0 = oy+dy*(j0)
     v1 = oy+dy*(j0+step)
-    for _ in [1..1<<16]
+    for _ in [1..1<<20]
       u0 = ox+dx*(i0)
       u1 = ox+dx*(i0+step)
       count += 1
