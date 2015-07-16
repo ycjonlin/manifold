@@ -383,7 +383,7 @@ class Stack extends Element
         v = 2*w*v+y
       if n < count
         n += 1+log(log(bailout)/log(radius))/log(2)
-      1#n
+      #n
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
