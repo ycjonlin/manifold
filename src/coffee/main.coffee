@@ -383,12 +383,12 @@ class Stack extends Element
         v = 2*w*v+y
       if n < count
         n += 1+log(log(bailout)/log(radius))/log(2)
-      n/count
+      n
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
       not ((m2-m1*m1)<1e-3)
-    color = (z)-> [128, z*(1<<14)|0,255]
+    color = (z)-> [128, z|0,255]
 
     @anchor = null
     @transforms = [new Transform(
