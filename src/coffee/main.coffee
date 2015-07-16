@@ -393,7 +393,6 @@ class Stack extends Element
       scale, 0, 0, -scale, 
       width/2, height/2)]
     @layers = [
-      new Fractal2D(@transforms, fractal, metric, color),
       new Grid(@transforms),
       new Axis(@transforms)
     ]
