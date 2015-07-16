@@ -278,7 +278,7 @@ class Fractal1D extends Layer
       @context.beginPath()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, 1<<8, 1<<10, expr.bind(null, s), valid
+      @_loop domain.x0, domain.x1, 1<<8, 1<<12, expr.bind(null, s), valid
 
       @context.restore()
       @context.lineWidth = 3
@@ -359,7 +359,7 @@ class Fractal2D extends Layer
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6 , 1<<9, expr, dist, scheme
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6 , 1<<10, expr, dist, scheme
 
       @context.restore()
 
