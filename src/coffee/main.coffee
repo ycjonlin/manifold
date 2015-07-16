@@ -278,7 +278,7 @@ class Fractal1D extends Layer
       @context.beginPath()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, 1<<8, 1<<12, expr.bind(null, s), valid
+      @_loop domain.x0, domain.x1, 1<<8, 1<<10, expr.bind(null, s), valid
 
       @context.restore()
       @context.lineWidth = 3
