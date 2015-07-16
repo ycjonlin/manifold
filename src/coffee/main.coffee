@@ -359,7 +359,7 @@ class Fractal2D extends Layer
       @context.save()
       @transform().apply @context
 
-      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<5, 1<<10, expr, dist, scheme
+      @_loop domain.x0, domain.x1, domain.y0, domain.y1, 1<<6 , 1<<10, expr, dist, scheme
 
       @context.restore()
 
@@ -383,13 +383,12 @@ class Stack extends Element
         v = 2*w*v+y
       if n < count
         n += 1+log(log(bailout)/log(radius))/log(2)
-      1#n
+      n/count
     metric = (x,y,z,w)-> 
       m1 = (x+y+z+w)/4
       m2 = (x*x+y*y+z*z+w*w)/4
-      #not ((m2-m1*m1)<1e10)
-      false
-    color = (z)-> [128, z, 255]
+      not ((m2-m1*m1)<1e-3)
+    color = (z)-> [128, z*(1<<14)|0,255]
 
     @anchor = null
     @transforms = [new Transform(
